@@ -26,16 +26,18 @@ use sha2::{digest::Digest, Sha512};
 const SECURITY: usize = 256;
 
 // u_i is private key and {u__i, prefix} are extended private key.
+#[derive(Clone, Serialize, Deserialize)]
 pub struct Keys {
     pub keypair: ExpandedKeyPair,
     pub party_index: u16,
 }
 
+#[derive(Clone, Serialize, Deserialize)]
 pub struct KeyGenBroadcastMessage1 {
     com: BigInt,
 }
 
-#[derive(Debug)]
+#[derive(Debug,Clone, Serialize, Deserialize)]
 pub struct Parameters {
     pub threshold: u16,   //t
     pub share_count: u16, //n
@@ -47,6 +49,7 @@ pub struct SharedKeys {
     prefix: Scalar<Ed25519>,
 }
 
+#[derive(Clone, Serialize, Deserialize)]
 pub struct EphemeralKey {
     pub r_i: Scalar<Ed25519>,
     pub R_i: Point<Ed25519>,
@@ -59,6 +62,7 @@ pub struct EphemeralSharedKeys {
     pub r_i: Scalar<Ed25519>,
 }
 
+#[derive(Clone, Serialize, Deserialize)]
 pub struct LocalSig {
     gamma_i: Scalar<Ed25519>,
     k: Scalar<Ed25519>,
